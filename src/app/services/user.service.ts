@@ -14,6 +14,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   createUser(user) {
+    // TODO: remove hard coded url to env config
     return this.http.post('http://localhost:3000/users', user, httpOptions);
   }
 }
