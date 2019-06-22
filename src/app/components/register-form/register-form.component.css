@@ -1,0 +1,7 @@
+.form-group {
+  display: block;
+  margin: auto;
+  max-width: 70%;
+  /* Temporary min width, will need to be changed for mobile */
+  min-width: 800px;
+}
