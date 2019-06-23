@@ -47,6 +47,5 @@ export class RegisterFormComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
     this.userService.createUser(this.profileForm.value).subscribe(result => console.log(result));
-    // this.httpClient.send(this.profileForm.value);
   }
 }

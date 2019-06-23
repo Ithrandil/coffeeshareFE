@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CreateUserDto } from '../models/create-user.dto';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +7,13 @@ import { CreateUserDto } from '../models/create-user.dto';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    responseType: 'text' as 'json',
+  };
+
   login(email: string, password: string) {
-    return this.http.post<CreateUserDto>('http://localhost:3000/users/auth', { email, password });
+    return this.http.post<any>('http://localhost:3000/auth', { email, password }, this.httpOptions);
     // this is just the HTTP call,
     // we still need to handle the reception of the token
     // .shareReplay()
