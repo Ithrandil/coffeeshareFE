@@ -10,14 +10,15 @@
       required
     />
     <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
-      <div *ngIf="firstName.errors.required">
+      <!-- <div *ngIf="firstName.errors.required"> -->
+      <div *ngIf="profileForm.controls['firstName'].hasError('required')">
         First name is required.
       </div>
     </div>
     <label for="lastName">Last Name</label>
     <input type="text" class="form-control" id="lastName" placeholder="Doe" formControlName="lastName" />
     <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
-      <div *ngIf="lastName.errors.required">
+      <div *ngIf="profileForm.controls['lastName'].hasError('required')">
         Last name is required.
       </div>
     </div>
@@ -30,10 +31,10 @@
       formControlName="email"
     />
     <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-      <div *ngIf="email.errors.required">
+      <div *ngIf="profileForm.controls['email'].hasError('required')">
         Email is required.
       </div>
-      <div *ngIf="email.errors.email">
+      <div *ngIf="profileForm.controls['email'].hasError('email')">
         Email must be...an email.
       </div>
     </div>
@@ -45,13 +46,25 @@
       placeholder="**********"
       formControlName="password"
     />
-    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-      <div *ngIf="password.errors.required">
-        Password is required.
-      </div>
-      <div *ngIf="password.errors.minlength">
-        Password must be 10 characters long.
-      </div>
+    <div
+      *ngIf="
+        password.invalid &&
+        (password.dirty || password.touched) &&
+        profileForm.controls['password'].hasError('required')
+      "
+      class="alert alert-danger"
+    >
+      Password is required.
+    </div>
+    <div
+      *ngIf="
+        password.invalid &&
+        (password.dirty || password.touched) &&
+        profileForm.controls['password'].hasError('minlength')
+      "
+      class="alert alert-danger"
+    >
+      Password must be 8 characters long.
     </div>
     <label for="confirmPassword">Confirm password</label>
     <input
@@ -62,18 +75,34 @@
       formControlName="confirmPassword"
     />
     <div
-      *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+      *ngIf="
+        confirmPassword.invalid &&
+        (confirmPassword.dirty || confirmPassword.touched) &&
+        profileForm.controls['confirmPassword'].hasError('required')
+      "
       class="alert alert-danger"
     >
-      <div *ngIf="confirmPassword.errors.required">
-        Password is required.
-      </div>
-      <div *ngIf="confirmPassword.errors.minlength">
-        Password must be 10 characters long.
-      </div>
-      <!-- <div *ngIf="confirmPassword.errors.pattern">
-        Password confirmation must be the same as the password.
-      </div> -->
+      Password is required.
+    </div>
+    <div
+      *ngIf="
+        confirmPassword.invalid &&
+        (confirmPassword.dirty || confirmPassword.touched) &&
+        profileForm.controls['confirmPassword'].hasError('minlength')
+      "
+      class="alert alert-danger"
+    >
+      Password must be 8 characters long.
+    </div>
+    <div
+      *ngIf="
+        confirmPassword.invalid &&
+        (confirmPassword.dirty || confirmPassword.touched) &&
+        profileForm.controls['confirmPassword'].hasError('PasswordsDifferent')
+      "
+      class="alert alert-danger"
+    >
+      Password confirmation must be the same as the password.
     </div>
 
     <button type="submit" [disabled]="!profileForm.valid">Submit</button>

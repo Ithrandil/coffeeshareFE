@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { passwordValidator } from '../../helpers/password.validator';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -8,22 +10,21 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
-  profileForm;
+  profileForm: FormGroup;
 
-  constructor(private userService: UserService) {}
+  constructor(public formBuilder: FormBuilder, private userService: UserService) {}
 
   ngOnInit() {
-    this.profileForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-        // Validators.pattern(this.password), DONT WORK USE A REGEX INCLUDING LETTER NUMBER ETC TO PUT ALSO ON PASSWORD AND VALIDATE ON HTML
-      ]),
-    });
+    this.profileForm = this.formBuilder.group(
+      {
+        firstName: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      },
+      { validator: passwordValidator },
+    );
   }
 
   get firstName() {
