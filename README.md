@@ -1,3 +1,25 @@
+## Coffee Share
+
+<p align="center">
+  <img src="https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=300" width="320" alt="Coffee Share" />
+</p>
+
+## Description
+
+The whole purpose of this project is, as a new developper, to expand my knowledge and skills on development, front and back.
+
+The backend repo can be found [HERE](https://github.com/Ithrandil/coffeeshareBE) and is done with the NestJs framework for a Typescript full-stack.
+
+Features already implemented:
+- Reactive form with validators and custon password confirmation validation.
+- First implementation of the user service
+- Login form, fetch of the JWT wich is then attached to every requests.
+
+Features previsions:
+- Routes protections with JWT
+- Search, add & remove friends from a list with validation of the other person
+- Store with Ngrx
+
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
